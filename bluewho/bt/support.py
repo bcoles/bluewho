@@ -52,8 +52,10 @@ class BluetoothSupport(object):
                 self.classes[major_class][minor_class] = (image_path,
                                                           description)
 
-    def get_classes(self, device_class):
+    def get_classes(self, device_class: int):
         """Return device minor, major class and services class"""
+        if not device_class:
+            return 0, 0, 0
         # Bits 02-07 Minor class bitwise
         minor_class = (device_class & 0xff) >> 2
         # Bits 08-12 Major class bitwise
